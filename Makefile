@@ -52,5 +52,6 @@ down: ## shut down stack
 
 
 reload: ##Reload nginx config
-	echo reload-placeholder
+	@$(DCCOMMAND) stop nginx
+	@$(DCCOMMAND) start nginx
 .PHONY: reload

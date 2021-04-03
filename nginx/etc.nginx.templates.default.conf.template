@@ -11,36 +11,20 @@ server {
         index  index.html index.htm;
     }
 
-    #error_page  404              /404.html;
-
-    # redirect server error pages to the static page /50x.html
-    #
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   /usr/share/nginx/html;
+    location /one/ {
+        #index  index.html index.htm;
+        #rewrite /one/(.*) /$1  break;
+        proxy_pass http://web1:8000/one/;
     }
 
-    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
-    #
-    #location ~ \.php$ {
-    #    proxy_pass   http://127.0.0.1;
-    #}
+    location /two/ {
+        # proxy_set_header Host $host;
+        # proxy_set_header X-Real-IP $remote_addr;
+        # rewrite ^/two/(.*) /$1  break;
+        proxy_pass http://web2:8000/two/;
+    }
 
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    #
-    #location ~ \.php$ {
-    #    root           html;
-    #    fastcgi_pass   127.0.0.1:9000;
-    #    fastcgi_index  index.php;
-    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-    #    include        fastcgi_params;
-    #}
 
-    # deny access to .htaccess files, if Apache's document root
-    # concurs with nginx's one
-    #
-    #location ~ /\.ht {
-    #    deny  all;
-    #}
+
 }
 
