@@ -11,17 +11,14 @@ server {
         index  index.html index.htm;
     }
 
-    location /one/ {
-        #index  index.html index.htm;
-        #rewrite /one/(.*) /$1  break;
-        proxy_pass http://web1:8000/one/;
+    location /one {
+        rewrite /one/(.*) /$1/  break;
+        proxy_pass http://web1:8000/;
     }
 
-    location /two/ {
-        # proxy_set_header Host $host;
-        # proxy_set_header X-Real-IP $remote_addr;
-        # rewrite ^/two/(.*) /$1  break;
-        proxy_pass http://web2:8000/two/;
+    location /two {
+        rewrite /two/(.*) /$1/  break;
+        proxy_pass http://web2:8000/;
     }
 
 
