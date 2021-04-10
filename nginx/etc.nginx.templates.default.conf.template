@@ -21,11 +21,6 @@ server {
         proxy_pass http://web2:8000/;
     }
 
-    # location /san {
-    #     rewrite /san/(.*) /$1/  break;
-    #     root /app
-    # }
-
     location /san/ {
         rewrite /san/(.*) /$1/  break;
 
