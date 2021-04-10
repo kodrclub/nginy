@@ -34,10 +34,19 @@ services:
     ports:
       - '5000:9000'
 
-  # web4:
-  #   build:
-  #     context: phpfpm
-  #   volumes:
-  #     - ./web4:/app
-  #   ports:
-  #     - '6000:8000'
+  web4-ng:
+    image: nginx:1.19.6
+    ports:
+      - '8080:80'
+    volumes:
+      - ./web3:/app
+      - ./nginx/etc.nginx.nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/etc.nginx.templates.web4.conf.template:/etc/nginx/templates/default.conf.template
+
+  web4:
+    build:
+      context: phpfpm
+    volumes:
+      - ./web4:/app
+    ports:
+      - '6000:8000'
